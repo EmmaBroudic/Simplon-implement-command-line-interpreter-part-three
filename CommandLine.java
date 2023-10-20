@@ -1,12 +1,14 @@
 import java.util.Scanner;
 
 public class CommandLine {
+
     // Déclaration de deux champs de type String
     private String fieldOne;
     private String fieldTwo;
 
     // Constructeur de la classe
     public CommandLine(String input) {
+
         String[] words = input.split(" ");
 
         if (words.length >= 2) {
@@ -20,12 +22,7 @@ public class CommandLine {
         }
     }
 
-    // Méthode pour afficher les valeurs des champs
-    public void printFields() {
-        System.out.println("Champ 1 : " + fieldOne);
-        System.out.println("Champ 2 : " + fieldTwo);
-    }
-
+    // Méthodes requêtes
     public String getCommand() {
         return fieldOne;
     }
@@ -34,6 +31,7 @@ public class CommandLine {
         return fieldTwo;
     }
 
+    // Lecture de l'input
     public static void main(String[] args) {
         // Création d'un objet Scanner pour lire l'entrée de l'utilisateur
         Scanner scanner = new Scanner(System.in);
@@ -47,8 +45,5 @@ public class CommandLine {
 
         // Ferme le scanner
         scanner.close();
-
-        // Appel de la méthode pour afficher les champs mis à jour
-        field.printFields();
     }
 }
