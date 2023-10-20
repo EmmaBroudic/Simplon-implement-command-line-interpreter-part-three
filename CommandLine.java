@@ -1,16 +1,23 @@
 import java.util.Scanner;
 
 public class CommandLine {
-
     // Déclaration de deux champs de type String
     private String fieldOne;
     private String fieldTwo;
 
     // Constructeur de la classe
-    public CommandLine() {
-        // Initialisation des champs
-        fieldOne = "Première chaîne";
-        fieldTwo = "Deuxième chaîne";
+    public CommandLine(String input) {
+        String[] words = input.split(" ");
+
+        if (words.length >= 2) {
+            // Met à jour la valeur de fieldOne avec le premier mot
+            fieldOne = words[0];
+
+            // Met à jour la valeur de fieldTwo avec le deuxième mot
+            fieldTwo = words[1];
+        } else {
+            System.out.println("L'entrée doit contenir au moins deux mots pour mettre à jour Champ 1 et Champ 2.");
+        }
     }
 
     // Méthode pour afficher les valeurs des champs
@@ -19,10 +26,15 @@ public class CommandLine {
         System.out.println("Champ 2 : " + fieldTwo);
     }
 
-    public static void main(String[] args) {
-        // Création d'une instance de la classe CommandLine
-        CommandLine field = new CommandLine();
+    public String getCommand() {
+        return fieldOne;
+    }
 
+    public String getArgument() {
+        return fieldTwo;
+    }
+
+    public static void main(String[] args) {
         // Création d'un objet Scanner pour lire l'entrée de l'utilisateur
         Scanner scanner = new Scanner(System.in);
 
@@ -30,19 +42,8 @@ public class CommandLine {
         System.out.print("Entrez une nouvelle valeur pour Champ 1 et Champ 2 : ");
         String input = scanner.nextLine();
 
-        // Divise l'entrée en mots
-        String[] words = input.split(" ");
-
-        // Vérifie s'il y a au moins deux mots dans l'entrée
-        if (words.length >= 2) {
-            // Met à jour la valeur de fieldOne avec le premier mot
-            field.fieldOne = words[0];
-
-            // Met à jour la valeur de fieldTwo avec le deuxième mot
-            field.fieldTwo = words[1];
-        } else {
-            System.out.println("L'entrée doit contenir au moins deux mots pour mettre à jour Champ 1 et Champ 2.");
-        }
+        // Création d'une instance de la classe CommandLine avec l'entrée utilisateur
+        CommandLine field = new CommandLine(input);
 
         // Ferme le scanner
         scanner.close();
