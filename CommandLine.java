@@ -17,9 +17,13 @@ public class CommandLine {
 
             // Met à jour la valeur de fieldTwo avec le deuxième mot
             fieldTwo = words[1];
-        } else {
-            System.out.println("L'entrée doit contenir au moins deux mots pour mettre à jour Champ 1 et Champ 2.");
-        }
+        } else if (words.length == 1) {
+            // Met à jour la valeur de fieldOne avec le premier mot
+            fieldOne = words[0];
+
+            // Met à jour la valeur de fieldTwo avec le deuxième mot
+            fieldTwo = null;
+	}
     }
 
     // Méthodes requêtes
@@ -45,5 +49,5 @@ public class CommandLine {
 
         // Ferme le scanner
         scanner.close();
-    }
+	}
 }
