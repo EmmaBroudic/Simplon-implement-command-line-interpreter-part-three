@@ -52,7 +52,9 @@ public class Cli {
 				} else if (command.equals("os")) {
 					output.append(Commands.os()); // print OS
 				} else if (command.equals("printenv")) {
+
 					output.append(Commands.printenv(userInput));
+
 					/*if (query < 2) {
         					Map<String, String> variables = System.getenv();
         					for (String key : variables.keySet()) {
@@ -66,14 +68,17 @@ public class Cli {
 							output.append(homeValue);
 						}
 					}*/
-        			} else if (parts[0].equals("echo") || parts[0].equals("print")) {
-					if (nbrElems < 2) {
+        			} else if (command.equals("echo") || command.equals("print")) {
+
+					output.append(Commands.echo(userInput));
+
+					/*if (nbrElems < 2) {
 						output.append("");
 					} else {						
 						for (int i = 1; i < nbrElems; i++) {
 							output.append(parts[i]).append(" ");
 						}
-					}
+					}*/
 				} else if (command.equals("ls")) {
 					if (nbrElems < 2) {
 						output.append("Not a directory");
