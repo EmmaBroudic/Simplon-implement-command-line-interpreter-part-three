@@ -80,7 +80,8 @@ public class Cli {
 						}
 					}*/
 				} else if (command.equals("ls")) {
-					if (nbrElems < 2) {
+					output.append(Commands.ls(userInput));
+					/*if (nbrElems < 2) {
 						output.append("Not a directory");
 					} else {
 						String filePath = argument;
@@ -102,7 +103,7 @@ public class Cli {
 						} else {
 							output.append("Not a directory");
 						}
-					}
+					}*/
 				} else {
 					output.append("Command '").append(parts[0]).append("' not found.");
 				}

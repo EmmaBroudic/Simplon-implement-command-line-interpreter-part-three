@@ -1,7 +1,12 @@
+import java.util.Scanner;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 public class Commands {
     public static String date() {
@@ -73,4 +78,40 @@ public class Commands {
 	    return output.toString(); // Renvoie la chaîne contenant les éléments de parts
     	}
     }
+
+	public static String ls(String userInput) {	
+		
+    	CommandLine field = new CommandLine(userInput);
+    	String command = field.getCommand();
+    	String argument = field.getArgument();
+    	String[] parts = field.getWords();
+    	int nbrElems = parts.length;
+    	StringBuilder output = new StringBuilder();
+
+    	if (nbrElems < 2) {
+        	return "Not a directory";
+    	} else {
+        	String filePath = argument;
+        
+        	File path = new File(filePath);
+
+        	if (!path.exists()) {
+            	return "Not a directory";
+        	} else if (path.isDirectory()) {
+            	File[] liste = path.listFiles();
+
+      			for(File item : liste) {
+        			if(item.isFile()) {
+						output.append(String.format("%s%n", item.getName()));
+        			} else if(item.isDirectory()) {
+						output.append(String.format("%s%n", item.getName()));
+            		}
+				}
+			} else {
+                return "Not a directory";
+            }
+        }
+    
+    	return output.toString();
+	}
 }
