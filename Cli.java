@@ -9,13 +9,13 @@ public class Cli {
 			String userInput = scanner.nextLine();
 
 			// Créer une instance de la classe CommandLine en utilisant l'entrée utilisateur
-            		CommandLine field = new CommandLine(userInput);
+            		CommandLine commandLineInput = new CommandLine(userInput);
 
             		// Obtenir la commande à partir de l'instance CommandLine
-            		String command = field.getCommand();
+            		String command = commandLineInput.getCommand();
 
-			// Obtenir l'intégralité de la ligne de commande dans un tableau
-			String[] parts = field.getWords();
+			// Obtenir l'intégralité de la ligne de commande en String
+			//String commandLineIntoString = commandLineInput.getWords();
 
 			StringBuilder output = new StringBuilder();
 
@@ -35,13 +35,13 @@ public class Cli {
 				} else if (command.equals("os")) {
 					output.append(Commands.os()); // print OS
 				} else if (command.equals("printenv")) {
-					output.append(Commands.printenv(userInput));
+					output.append(Commands.printenv(commandLineInput));
         			} else if (command.equals("echo") || command.equals("print")) {
-					output.append(Commands.echo(userInput));
+					output.append(Commands.echo(commandLineInput));
 				} else if (command.equals("ls")) {
-					output.append(Commands.ls(userInput));
+					output.append(Commands.ls(commandLineInput));
 				} else {
-					output.append("Command '").append(parts[0]).append("' not found.");
+					output.append("Command '").append(command).append("' not found.");
 				}
 			}
 			System.out.println(output); // Print with new line (ln)

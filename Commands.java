@@ -7,6 +7,10 @@ import java.util.Map;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+// ajouts pour commande cat
+//import java.io.BufferedReader;
+//import java.io.FileReader;
+//import java.io.IOException;
 
 public class Commands {
     public static String date() {
@@ -35,16 +39,16 @@ public class Commands {
     public static String os() {
         return System.getProperty("os.name") + " (" + System.getProperty("os.version") + ")";
     }
+    //public static String printenv(CommandLine commandLineInput)
+    public static String printenv(CommandLine userInput) {
 
-    public static String printenv(String userInput) {
-        CommandLine field = new CommandLine(userInput);
-        String command = field.getCommand();
-        String argument = field.getArgument();
-        String[] parts = field.getWords();
-        int nbrElems = parts.length;
+        String command = userInput.getCommand();
+        String argument = userInput.getArgument();
+        int nbrElems = userInput.queryArg();
+
         StringBuilder output = new StringBuilder();
 
-        if (nbrElems < 2) {
+        if (nbrElems == 0) {
             Map<String, String> variables = System.getenv();
             for (Map.Entry<String, String> entry : variables.entrySet()) {
                 output.append(entry.getKey()).append("=").append(entry.getValue()).append(System.lineSeparator());
@@ -60,35 +64,32 @@ public class Commands {
         }
     }
 
-    public static String echo(String userInput) {
-        CommandLine field = new CommandLine(userInput);
-        String command = field.getCommand();
-        String argument = field.getArgument();
-        String[] parts = field.getWords();
-        int nbrElems = parts.length;
+    public static String echo(CommandLine userInput) {
+
+        String command = userInput.getCommand();
+        String argument = userInput.getArgument();
+        int nbrElems = userInput.queryArg();
+
         StringBuilder output = new StringBuilder();
 
-        if (nbrElems < 2) {
-            return ""; // Renvoie une chaîne vide si aucune valeur n'est disponible
+        if (nbrElems == 0) {
+            return "";
         } else {
-            for (int i = 1; i < nbrElems; i++) {
-                output.append(parts[i]).append(" ");
-            }
+            return argument;
         
-	    return output.toString(); // Renvoie la chaîne contenant les éléments de parts
+	    //return output.toString();
     	}
     }
 
-	public static String ls(String userInput) {	
+	public static String ls(CommandLine userInput) {	
 		
-    	CommandLine field = new CommandLine(userInput);
-    	String command = field.getCommand();
-    	String argument = field.getArgument();
-    	String[] parts = field.getWords();
-    	int nbrElems = parts.length;
-    	StringBuilder output = new StringBuilder();
+        String command = userInput.getCommand();
+        String argument = userInput.getArgument();
+        int nbrElems = userInput.queryArg();
 
-    	if (nbrElems < 2) {
+        StringBuilder output = new StringBuilder();
+
+    	if (nbrElems == 0) {
         	return "Not a directory";
     	} else {
         	String filePath = argument;
@@ -114,4 +115,19 @@ public class Commands {
     
     	return output.toString();
 	}
+
+    /*public static String cat(String userInput) {
+        CommandLine field = new CommandLine(userInput);
+    	String command = field.getCommand();
+    	String argument = field.getArgument();
+    	String[] parts = field.getWords();
+    	int nbrElems = parts.length;
+    	StringBuilder output = new StringBuilder();
+    
+        if (nbrElems < 2) {
+        	return "Please specify a path to a text file to read";
+    	} else {
+        }
+    
+    }*/
 }
