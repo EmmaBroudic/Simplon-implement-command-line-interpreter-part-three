@@ -51,20 +51,21 @@ public class Cli {
 					output.append(Commands.userHome()); // print home
 				} else if (command.equals("os")) {
 					output.append(Commands.os()); // print OS
-				} else if (parts[0].equals("printenv")) {
-					if (nbrElems < 2) {
+				} else if (command.equals("printenv")) {
+					output.append(Commands.printenv(userInput));
+					/*if (query < 2) {
         					Map<String, String> variables = System.getenv();
         					for (String key : variables.keySet()) {
             						output.append(key).append("=").append(variables.get(key)).append(System.lineSeparator());
       						}
 					} else {
-						String homeValue = System.getenv(parts[1]);
+						String homeValue = System.getenv(argument);
 						if (homeValue == null) {
 							output.append("");
 						} else {
 							output.append(homeValue);
 						}
-					}
+					}*/
         			} else if (parts[0].equals("echo") || parts[0].equals("print")) {
 					if (nbrElems < 2) {
 						output.append("");
