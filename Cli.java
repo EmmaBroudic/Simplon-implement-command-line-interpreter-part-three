@@ -33,10 +33,12 @@ public class Cli {
 					output.append(Commands.os()); // print OS
 				} else if (command.equals("printenv")) {
 					output.append(Commands.printenv(commandLineInput));
-        			} else if (command.equals("echo") || command.equals("print")) {
+        		} else if (command.equals("echo") || command.equals("print")) {
 					output.append(Commands.echo(commandLineInput));
 				} else if (command.equals("ls")) {
 					output.append(Commands.ls(commandLineInput));
+				} else if (command.equals("cat")) {
+					output.append(Commands.cat(commandLineInput));
 				} else {
 					output.append("Command '").append(command).append("' not found.");
 				}
