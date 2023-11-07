@@ -5,11 +5,12 @@ public class CommandLine {
     // Déclaration de deux champs de type String
     private String fieldOne;
     private String fieldTwo;
+    private String[] words;
 
     // Constructeur de la classe
     public CommandLine(String input) {
 
-        String[] words = input.split(" ");
+        words = input.split(" ");
 
         if (words.length >= 2) {
             // Met à jour la valeur de fieldOne avec le premier mot
@@ -33,6 +34,18 @@ public class CommandLine {
 
     public String getArgument() {
         return fieldTwo;
+    }
+
+    public String[] getWords() {
+	return words;
+    }
+
+    public int queryArg() {
+	if (fieldTwo == null) {
+		return 0;
+	} else {
+		return 1;
+	}
     }
 
     // Lecture de l'input

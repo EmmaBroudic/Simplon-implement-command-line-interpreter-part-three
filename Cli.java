@@ -9,9 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Cli {
-
     public static void main(String[] args) {
-
 		Scanner scanner = new Scanner(System.in); // Listen to the standard input (console)
 		System.out.print("> "); // Prompt
 
@@ -25,28 +23,34 @@ public class Cli {
             		String command = field.getCommand();
 
             		// Obtenir l'argument à partir de l'instance CommandLine
-            		//String argument = field.getArgument();
+            		String argument = field.getArgument();
+
+			// Obtenir l'intégralité de la ligne de commande dans un tableau
+			String[] parts = field.getWords();
+
+			// Si la ligne de commande contient un argument, renvoie 1, sinon renvoie 0
+			int query = field.queryArg();
+
+			System.out.println(query);
 
 			StringBuilder output = new StringBuilder();
-			String[] parts = command.split(" ");
 			int nbrElems = parts.length;
 
 			if (command.equals("exit") || command.equals("logout")) {
 				break; // Forces exit of the while loop
 			} else {
-
 				if (command.equals("date")) {
-					output.append(LocalDate.now()); // print date
+					output.append(Commands.date());
 				} else if (command.equals("time")) {
-					output.append(LocalTime.now()); // print date
+					output.append(Commands.time());
 				} else if (command.equals("datetime")) {
-					output.append(LocalDateTime.now()); // print date and time
+					output.append(Commands.dateTime());
 				} else if (command.equals("useraccount")) {
-					output.append(System.getProperty("user.name")); // print name
+					output.append(Commands.userAccount()); // print name
 				} else if (command.equals("userhome")) {
-					output.append(System.getProperty("user.home")); // print home
+					output.append(Commands.userHome()); // print home
 				} else if (command.equals("os")) {
-					output.append(System.getProperty("os.name")).append(" (").append(System.getProperty("os.version")).append(")"); // print OS
+					output.append(Commands.os()); // print OS
 				} else if (parts[0].equals("printenv")) {
 					if (nbrElems < 2) {
         					Map<String, String> variables = System.getenv();
@@ -69,11 +73,11 @@ public class Cli {
 							output.append(parts[i]).append(" ");
 						}
 					}
-				} else if (parts[0].equals("ls")) {
+				} else if (command.equals("ls")) {
 					if (nbrElems < 2) {
 						output.append("Not a directory");
 					} else {
-						String filePath = parts[1];
+						String filePath = argument;
 						
         					File path = new File(filePath);
 
