@@ -39,7 +39,7 @@ public class Commands {
     public static String os() {
         return System.getProperty("os.name") + " (" + System.getProperty("os.version") + ")";
     }
-    //public static String printenv(CommandLine commandLineInput)
+
     public static String printenv(CommandLine userInput) {
 
         String command = userInput.getCommand();
@@ -76,8 +76,6 @@ public class Commands {
             return "";
         } else {
             return argument;
-        
-	    //return output.toString();
     	}
     }
 

@@ -9,13 +9,10 @@ public class Cli {
 			String userInput = scanner.nextLine();
 
 			// Créer une instance de la classe CommandLine en utilisant l'entrée utilisateur
-            		CommandLine commandLineInput = new CommandLine(userInput);
+            CommandLine commandLineInput = new CommandLine(userInput);
 
-            		// Obtenir la commande à partir de l'instance CommandLine
-            		String command = commandLineInput.getCommand();
-
-			// Obtenir l'intégralité de la ligne de commande en String
-			//String commandLineIntoString = commandLineInput.getWords();
+            // Obtenir la commande à partir de l'instance CommandLine
+            String command = commandLineInput.getCommand();
 
 			StringBuilder output = new StringBuilder();
 
