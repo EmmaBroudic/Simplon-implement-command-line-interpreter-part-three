@@ -46,11 +46,11 @@ public class Commands {
 
         String command = userInput.getCommand();
         String argument = userInput.getArgument();
-        int nbrElems = userInput.queryArg();
+        boolean hasArgu = userInput.hasArgument();
 
         StringBuilder output = new StringBuilder();
 
-        if (nbrElems == 0) {
+        if (hasArgu == false) {
             Map<String, String> variables = System.getenv();
             for (Map.Entry<String, String> entry : variables.entrySet()) {
                 output.append(entry.getKey()).append("=").append(entry.getValue()).append(System.lineSeparator());
@@ -70,11 +70,11 @@ public class Commands {
 
         String command = userInput.getCommand();
         String argument = userInput.getArgument();
-        int nbrElems = userInput.queryArg();
+        boolean hasArgu = userInput.hasArgument();
 
         //StringBuilder output = new StringBuilder();
 
-        if (nbrElems == 0) {
+        if (hasArgu == false) {
             return "";
         } else {
             return argument;
@@ -85,11 +85,11 @@ public class Commands {
 		
         String command = userInput.getCommand();
         String argument = userInput.getArgument();
-        int nbrElems = userInput.queryArg();
+        boolean hasArgu = userInput.hasArgument();
 
         StringBuilder output = new StringBuilder();
 
-    	if (nbrElems == 0) {
+    	if (hasArgu == false) {
         	return "Not a directory";
     	} else {
         	String filePath = argument;
@@ -102,11 +102,7 @@ public class Commands {
             	File[] liste = path.listFiles();
 
       			for(File item : liste) {
-        			if(item.isFile()) {
-						output.append(String.format("%s%n", item.getName()));
-        			} else if(item.isDirectory()) {
-						output.append(String.format("%s%n", item.getName()));
-            		}
+					output.append(String.format("%s%n", item.getName()));
 				}
 			} else {
                 return "Not a directory";
@@ -117,15 +113,11 @@ public class Commands {
 	}
 
     public static String cat(CommandLine userInput) {
-        String command = userInput.getCommand();
         String argument = userInput.getArgument();
-        int nbrElems = userInput.queryArg();
+        boolean hasArgu = userInput.hasArgument();
+        StringBuilder output = new StringBuilder();
 
-        // créer un nouveau nom de fichier
-        int indexDuPoint = argument.indexOf('.');
-        String newFileName = argument.substring(0, indexDuPoint);
-
-        if (nbrElems == 0) {
+        if (!hasArgu) {
             return "Please specify a path to a text file to read";
         } else {
             String filePath = argument;
@@ -136,22 +128,15 @@ public class Commands {
             }
 
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                String outputFilePath = newFileName + "-me.txt"; // nom du nouveau fichier
-                BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilePath));
-
                 String line;
-                
                 int i = 1;
 
                 while ((line = reader.readLine()) != null) {
-                    String modifiedLine = i + ". " + line; // Ajoutez votre nouvel élément à chaque ligne
-                    writer.write(modifiedLine);
-                    writer.newLine(); // Écriture d'une nouvelle ligne dans le fichier de sortie
+                    output.append(i).append(". ").append(line).append("\n");
                     i++;
                 }
 
-                writer.close(); // Fermer le BufferedWriter après avoir fini l'écriture
-                return "New file created";
+                return output.toString();
             } catch (IOException e) {
                 return "Error reading file";
             }

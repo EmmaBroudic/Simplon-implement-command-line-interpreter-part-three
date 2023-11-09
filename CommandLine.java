@@ -4,10 +4,10 @@ public class CommandLine {
 
     private String command;
     private String argument;
-    private String[] words;
+    
 
     public CommandLine(String input) {
-        words = input.split(" ", 2);
+        String[] words = input.split(" ", 2);
 
         if (words.length >= 2) {
             command = words[0];
@@ -26,11 +26,11 @@ public class CommandLine {
         return argument;
     }
 
-    public int queryArg() {
+    public boolean hasArgument() {
         if (argument == null) {
-            return 0;
+            return false;
         } else {
-            return 1;
+            return true;
         }
     }
 }
